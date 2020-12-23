@@ -1,0 +1,12 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: webapi-dotnet-deployment-so
+spec:
+  scaleTargetRef:
+    name: webapi-dotnet-deployment
+  pollingInterval: 20
+  triggers:
+    - type: external
+      metadata:
+        scalerAddress: sample-external-sc-svc.external-scaler-ns:9090

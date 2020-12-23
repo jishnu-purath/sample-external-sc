@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-external-sc
+  namespace: external-scaler-ns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sample-external-sc
+  template:
+    metadata:
+      labels:
+        app: sample-external-sc
+    spec:
+      containers:
+        - name: scaler
+          image: jishnuap/sample-sc:1.1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9090
+          env:
+            - name: URL
+              value: https://1edffe41d16b038b26589f6d9740d18c.m.pipedream.net
+            - name: PORT
+              value: "0.0.0.0:9090"

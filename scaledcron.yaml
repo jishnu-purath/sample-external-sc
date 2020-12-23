@@ -1,0 +1,15 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: cron-scaledobject
+  namespace: default
+spec:
+  scaleTargetRef:
+    name: webapi-dotnet-deployment
+  triggers:
+  - type: cron
+    metadata:
+      timezone: Asia/Kolkata
+      start: 50 * * * *
+      end: 59 * * * *
+      desiredReplicas: "10"
